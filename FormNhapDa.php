@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require_once 'db.php';
 $conn = db();
 require 'functions.php';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

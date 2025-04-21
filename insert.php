@@ -24,6 +24,7 @@ foreach ($_POST as $key => $value) {
   $values[] = '?';
   $types .= is_numeric($value) ? 'd' : 's';
   $params[] = $value;
+  
 }
 
 $sql = "INSERT INTO $table (" . implode(',', $columns) . ") VALUES (" . implode(',', $values) . ")";
