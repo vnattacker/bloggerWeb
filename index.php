@@ -176,22 +176,21 @@ function exportToExcel() {
 </script>
 <script>
 $(document).ready(function(){
-    <?php foreach ($tables as $table): ?>
-        $('#form-<?= $table ?>').on('submit', function(e){
-            e.preventDefault();
-            $.post('insert.php?table=<?= $table ?>', $(this).serialize(), function(data){
-                if(data.success){
-                    alert("Thêm thành công!");
-                    location.reload(); // hoặc viết hàm update lại tbody nếu không muốn reload
-                } else {
-                    alert("Lỗi: " + data.message);
-                }
-            }, 'json');
-        });
-    <?php endforeach; ?>
+  <?php foreach ($tables as $table): ?>
+    $('#form-<?= $table ?>').on('submit', function(e){
+      e.preventDefault();
+      $.post('insert.php?table=<?= $table ?>', $(this).serialize(), function(data){
+        if(data.success){
+          alert("Thêm thành công!");
+          location.reload(); // hoặc viết hàm update lại tbody nếu không muốn reload
+        } else {
+          alert("Lỗi: " + data.message);
+        }
+      }, 'json');
+    });
+  <?php endforeach; ?>
 });
 </script>
-
 <script>
 function importExcel(tableName) {
     const input = document.getElementById('excelFile-' + tableName);
