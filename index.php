@@ -32,14 +32,14 @@ $conn = db();
   <div class="mb-3">
     <button class="btn btn-success" onclick="exportToExcel()">Xuất Excel</button>
   </div>
-  <div class="mt-3">
+  <!-- <div class="mt-3">
   <label for="excelFile-<?= $table ?>" class="form-label">Nhập từ Excel:</label>
   <input type="file" class="form-control mb-2" id="excelFile-<?= $table ?>" accept=".xlsx">
   <button class="btn btn-sm btn-primary" onclick="importExcel('<?= $table ?>')">Nhập file Excel</button>
-</div>
+</div> -->
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <?php
-    $tables = ["BanNuocMia", "NhapMia", "NhapDa", "NhapQuat", "ChiTieu", "TienDienNuoc", "ngansachcuatoi"];
+    $tables = ["bannuocmia", "nhapmia", "nhapda", "nhapquat", "chitieu", "tiendiennuoc", "ngansachcuatoi"];
     foreach ($tables as $i => $table):
       $default = GetTableName($table);
     ?>
@@ -50,15 +50,18 @@ $conn = db();
       </li>
     <?php endforeach; ?>
   </ul>
-
+<!--form lọc-->
   <div class="tab-content" id="myTabContent">
     <?php
     foreach ($tables as $i => $table):
+      $columnDate = DateField($table);
       $ngay = $_GET['ngay'] ?? '';
-      $where = $ngay ? "WHERE DATE(ngay) = '" . $conn->real_escape_string($ngay) . "'" : "";
-      if (in_array($table, ['NhapMia', 'NhapDa', 'NhapQuat'])) $where = $ngay ? "WHERE DATE(ngay_nhap) = '" . $conn->real_escape_string($ngay) . "'" : "";
-      if ($table == 'ChiTieu') $where = $ngay ? "WHERE DATE(ngay_mua) = '" . $conn->real_escape_string($ngay) . "'" : "";
-      if ($table == 'TienDienNuoc') $where = $ngay ? "WHERE DATE(ngay_dong) = '" . $conn->real_escape_string($ngay) . "'" : "";
+      $where = $ngay ? "WHERE DATE($columnDate) = '" . $conn->real_escape_string($ngay) . "'" : "";
+     
+     
+      // if (in_array($table, ['nhapmia', 'nhapda', 'nhapquat'])) $where = $ngay ? "WHERE DATE(ngay_nhap) = '" . $conn->real_escape_string($ngay) . "'" : "";
+      // if ($table == 'chitieu') $where = $ngay ? "WHERE DATE(ngay_mua) = '" . $conn->real_escape_string($ngay) . "'" : "";
+      // if ($table == 'tiendiennuoc') $where = $ngay ? "WHERE DATE(ngay_dong) = '" . $conn->real_escape_string($ngay) . "'" : "";
 
       $result = $conn->query("SELECT * FROM $table $where");
     ?>

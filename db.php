@@ -10,11 +10,9 @@ $dbname = "quanlybanhang";
 
 // Kết nối đến cơ sở dữ liệu
 $conn = new mysqli($servername, $username, $password, $dbname);
-	return  $conn;
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-$kn= db();
-// Kiểm tra kết nối
-if ($kn->connect_error) {
-    die("Connection failed: " . $kn->connect_error);
+	return  $conn;
 }
 ?>

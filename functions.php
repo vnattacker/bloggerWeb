@@ -85,22 +85,22 @@ function GetFieldName($input){
 function GetTableName($input){
     $default = "";
     switch($input){
-					case "BanNuocMia":
+					case "bannuocmia":
 						$default = "Bán Nước";
 						break;
-					case "NhapMia":
+					case "nhapmia":
 						$default = "Nhập Mía";
 						break;
-					case "NhapDa":
+					case "nhapda":
 						$default = "Nhập Đá";
 						break;
-					case "NhapQuat":
+					case "nhapquat":
 						$default = "Nhập Quất (Tắc)";
 						break;
-					case "ChiTieu":
+					case "chitieu":
 						$default = "Chi Tiêu";
 						break;
-					case "TienDienNuoc":
+					case "tiendiennuoc":
 						$default = "Tiền Điện/Nước";
 						break;
                     case "ngansachcuatoi":
@@ -114,7 +114,24 @@ function GetTableName($input){
 }
 
 function DateField($field_name){
-
-
+    switch($field_name){
+        case "bannuocmia":
+            return "ngay_ban";
+        case "nhapmia":
+            return "ngay_nhap";
+        case "nhapda":
+            return "ngay_nhap";
+        case "nhapquat":
+            return "ngay_nhap";
+        case "chitieu":
+            return "ngay_mua";
+        case "tiendiennuoc":
+            return "ngay_dong";
+        case "ngansachcuatoi":
+            return "ngay_nhap";
+    
+        default:
+            return "ngay_ban";
+    }
 }
 ?>
