@@ -69,8 +69,15 @@ function GetFieldName($input){
             case "nguoi_dong":
                 $defaults = "Người đóng";
                 break;	
+            case "ten":
+            $defaults = "Tên";
+            break;	
+            case "NganSachHienTai":
+            $defaults = "Ngân sách hiện tại";
+            break;	
+           	
             default:
-                $defaults = "Không xác định";
+                $defaults = "Dữ liệu Không xác định";
                 break;
         }
         return $defaults;
@@ -96,11 +103,18 @@ function GetTableName($input){
 					case "TienDienNuoc":
 						$default = "Tiền Điện/Nước";
 						break;
-				
+                    case "ngansachcuatoi":
+                    $default = "Ngân Sách Của Tôi";
+                    break;
 					default:
-						$default = "Không xác định";
+						$default = "Bảng Không xác định";
 						break;
 				}
     return $default;
+}
+
+function DateField($field_name){
+
+
 }
 ?>

@@ -26,3 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="col-md-2"><input type="number" name="so_cong_to_thang_truoc" class="form-control" placeholder="Công tơ trước" required></div>
     <div class="col-md-2"><input type="number" name="so_cong_to_thang_sau" class="form-control" placeholder="Công tơ sau" required></div>
     <div class="col-md-3"><input type="text" name="tu_ngay_den_ngay" class="form-control" placeholder_
+    <script>
+  $(document).ready(function(){
+    function OnChange(){
+      var soluong = $('input[name="so_luong"]').val();
+        var dongia = $('input[name="don_gia"]').val();
+        var thanhtien = soluong * dongia;
+        $('input[name="thanh_tien"]').val(thanhtien);
+    }
+
+  });
+</script>

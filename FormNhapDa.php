@@ -64,3 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </div>
 </body>
 </html>
+<script>
+  $(document).ready(function(){
+    function OnChange(){
+      var soluong = $('input[name="so_luong"]').val();
+        var dongia = $('input[name="don_gia"]').val();
+        var thanhtien = soluong * dongia;
+        $('input[name="thanh_tien"]').val(thanhtien);
+    }
+
+  });
+</script>

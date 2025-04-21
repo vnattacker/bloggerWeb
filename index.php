@@ -39,7 +39,7 @@ $conn = db();
 </div>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <?php
-    $tables = ["BanNuocMia", "NhapMia", "NhapDa", "NhapQuat", "ChiTieu", "TienDienNuoc"];
+    $tables = ["BanNuocMia", "NhapMia", "NhapDa", "NhapQuat", "ChiTieu", "TienDienNuoc", "ngansachcuatoi"];
     foreach ($tables as $i => $table):
       $default = GetTableName($table);
     ?>
@@ -101,7 +101,7 @@ $conn = db();
             <?php $result->data_seek(0); while ($row = $result->fetch_assoc()): ?>
               <tr>
                 <?php foreach ($row as $cell): ?>
-                  <td><?= htmlspecialchars($cell) ?></td>
+                  <td><?= is_numeric($cell) ? number_format($cell) :htmlspecialchars($cell) ?></td>
                 <?php endforeach; ?>
                 <td>
                   <a href="edit.php?table=<?= $table ?>&id=<?= $row['id'] ?>" class="btn btn-sm btn-warning">Sửa</a>

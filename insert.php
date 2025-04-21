@@ -6,7 +6,7 @@ $conn = db();
 header('Content-Type: application/json');
 
 $table = $_GET['table'] ?? '';
-$allowed_tables = ['BanNuocMia', 'NhapMia', 'NhapDa', 'NhapQuat', 'ChiTieu', 'TienDienNuoc'];
+$allowed_tables = ['BanNuocMia', 'NhapMia', 'NhapDa', 'NhapQuat', 'ChiTieu', 'TienDienNuoc', 'ngansachcuatoi'];
 
 if (!in_array($table, $allowed_tables)) {
   echo json_encode(['success' => false, 'message' => 'Bảng không hợp lệ']);

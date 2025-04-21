@@ -30,3 +30,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="col-md-2 mt-2"><button class="btn btn-primary">Thêm</button></div>
   </div>
 </form>
+<script>
+  $(document).ready(function(){
+    function OnChange(){
+      var soluong = $('input[name="so_luong"]').val();
+        var dongia = $('input[name="don_gia"]').val();
+        var thanhtien = soluong * dongia;
+        $('input[name="thanh_tien"]').val(thanhtien);
+    }
+
+  });
+</script>
