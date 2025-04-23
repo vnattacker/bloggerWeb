@@ -78,6 +78,12 @@ function GetFieldName($input){
             case "loaisp":
             $defaults = "Loại SP: Bún/Mỳ/Cơm Hến";
             break;
+            case "nguoighi":
+            $defaults = "Người thêm";
+            break;
+            case "nguoisua":
+            $defaults = "Người sửa";
+            break;
             default:
                 $defaults = "Dữ liệu Không xác định";
                 break;
@@ -146,5 +152,10 @@ function executeQuery($conn, $sql) {
     } else {
         return 0;
     }
+}
+
+function ranClr(){
+    $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+    echo $colors[array_rand($colors)];
 }
 ?>

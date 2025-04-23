@@ -1,12 +1,16 @@
 <?php
 // insert.php
+session_start();
 include 'db.php';
 $conn = db();
-
+if($_SESSION['username'] != 'kz20112023' && $_SESSION['username'] != 'TRANNGUYEN'){
+  echo json_encode(['success' => false, 'message' => 'Có lỗi xảy ra khi thêm doanh thu']);
+  exit;
+}
 header('Content-Type: application/json');
 
 $table = $_GET['table'] ?? '';
-$allowed_tables = ['bannuocmia', 'bunhen','nhapmia', 'nhapda', 'nhapquat', 'chitieu', 'tiendiennuoc', 'ngansachcuatoi'];
+$allowed_tables = ['bannuocmia', 'bunhen', 'nhapmia', 'nhapda', 'nhapquat', 'chitieu', 'tiendiennuoc', 'ngansachcuatoi'];
 
 if (!in_array($table, $allowed_tables)) {
   echo json_encode(['success' => false, 'message' => 'Bảng không hợp lệ']);
@@ -18,13 +22,25 @@ $values = [];
 $types = '';
 $params = [];
 
+// Thêm cột nguoighi và giá trị session username vào mảng
+$columns[] = 'nguoighi';
+$values[] = '?';
+$types .= 's';
+$params[] = $_SESSION['username'];
+
 foreach ($_POST as $key => $value) {
   if ($key === 'action') continue;
   $columns[] = $key;
   $values[] = '?';
-  $types .= is_numeric($value) ? 'd' : 's';
+  // Kiểm tra kiểu dữ liệu để set types
+  if (is_numeric($value)) {
+    $types .= 'd';
+  } else if (strtotime($value) !== false) { // Kiểm tra xem có phải là ngày không
+    $types .= 's'; // coi như string để truyền vào DATETIME
+  } else {
+    $types .= 's';
+  }
   $params[] = $value;
-  
 }
 
 $sql = "INSERT INTO $table (" . implode(',', $columns) . ") VALUES (" . implode(',', $values) . ")";
@@ -45,3 +61,4 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
+?>

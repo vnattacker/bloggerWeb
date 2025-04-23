@@ -14,7 +14,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 
 // Thống kê hôm nay
-$homNay = date("Y-m-d");
+$homNay = date("Y-m-d H:i:s");
 $tongDoanhThuHomNay = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE(ngay_ban) = '$homNay'");
 $soLy5KBanHomNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE(ngay_ban) = '$homNay' AND don_gia = 5000");
 $soLy10KBanHomNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE(ngay_ban) = '$homNay' AND don_gia = 10000");
@@ -22,25 +22,25 @@ $tongSoLyBanHomNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia W
 
 
 // Thống kê hôm qua
-$homQua = date("Y-m-d", strtotime("-1 day"));
+$homQua = date("Y-m-d H:i:s", strtotime("-1 day"));
 $tongDoanhThuHomQua = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE(ngay_ban) = '$homQua'");
 $soLy5KBanHomQua = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE(ngay_ban) = '$homQua' AND don_gia = 5000");
 $soLy10KBanHomQua = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE(ngay_ban) = '$homQua' AND don_gia = 10000");
 $tongSoLyBanHomQua = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE(ngay_ban) = '$homQua'");
 
 // Thống kê tháng này
-$thangNay = date("Y-m");
-$tongDoanhThuThangNay = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangNay'");
-$soLy5KBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangNay' AND don_gia = 5000");
-$soLy10KBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangNay' AND don_gia = 10000");
-$tongSoLyBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangNay'");
+$thangNay = date("Y-m H:i:s");
+$tongDoanhThuThangNay = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangNay'");
+$soLy5KBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangNay' AND don_gia = 5000");
+$soLy10KBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangNay' AND don_gia = 10000");
+$tongSoLyBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangNay'");
 
 // Thống kê tháng trước
 $thangTruoc = date("Y-m", strtotime("-1 month"));
-$tongDoanhThuThangTruoc = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangTruoc'");
-$soLy5KBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangTruoc' AND don_gia = 5000");
-$soLy10KBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangTruoc' AND don_gia = 10000");
-$tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangTruoc'");
+$tongDoanhThuThangTruoc = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangTruoc'");
+$soLy5KBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangTruoc' AND don_gia = 5000");
+$soLy10KBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangTruoc' AND don_gia = 10000");
+$tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangTruoc'");
 
 
 ?>
@@ -61,7 +61,7 @@ $tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocm
 
   <div class="row">
     <div class="col-md-4">
-      <div class="card bg-primary text-white mb-3">
+      <div class="card bg-info text-white mb-3">
         <div class="card-body">
           <h5 class="card-title">Hôm nay (<?php echo date("d-m-Y"); ?>)</h5>
           <p class="card-text">
@@ -75,7 +75,7 @@ $tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocm
     </div>
 
     <div class="col-md-4">
-      <div class="card bg-success text-white mb-3">
+      <div class="card bg-danger text-white mb-3">
         <div class="card-body">
           <h5 class="card-title">Hôm qua (<?php echo date("d-m-Y", strtotime("-1 day")); ?>)</h5>
           <p class="card-text">
@@ -102,7 +102,7 @@ $tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocm
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card bg-warning text-white mb-3">
+      <div class="card bg-danger text-white mb-3">
         <div class="card-body">
           <h5 class="card-title">Tháng trước (<?php echo date("m-Y", strtotime("-1 month")); ?>)</h5>
           <p class="card-text">

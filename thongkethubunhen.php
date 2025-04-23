@@ -65,7 +65,7 @@ $tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bunhen W
 
   <div class="row">
     <div class="col-md-4">
-      <div class="card bg-primary text-white mb-3">
+      <div class="card bg-danger text-white mb-3">
         <div class="card-body">
           <h5 class="card-title">Hôm nay (<?php echo date("d-m-Y"); ?>)</h5>
           <p class="card-text">
@@ -81,7 +81,7 @@ $tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bunhen W
     </div>
 
     <div class="col-md-4">
-      <div class="card bg-success text-white mb-3">
+      <div class="card bg-info text-white mb-3">
         <div class="card-body">
           <h5 class="card-title">Hôm qua (<?php echo date("d-m-Y", strtotime("-1 day")); ?>)</h5>
           <p class="card-text">
@@ -97,7 +97,7 @@ $tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bunhen W
     </div>
 
     <div class="col-md-4">
-      <div class="card bg-info text-white mb-3">
+      <div class="card bg-danger text-white mb-3">
         <div class="card-body">
           <h5 class="card-title">Tháng này (<?php echo date("m-Y"); ?>)</h5>
           <p class="card-text">
@@ -111,7 +111,7 @@ $tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bunhen W
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card bg-warning text-white mb-3">
+      <div class="card bg-info text-white mb-3">
         <div class="card-body">
           <h5 class="card-title">Tháng trước (<?php echo date("m-Y", strtotime("-1 month")); ?>)</h5>
           <p class="card-text">
