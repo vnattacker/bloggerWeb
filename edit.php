@@ -1,4 +1,9 @@
 <?php
+session_start();
+if($_SESSION['username'] != 'kz20112023') {
+echo ("<script>alert('Có lỗi xảy ra, không thể sửa!');</script>");
+return;
+}
 include 'db.php';
 $conn = db();
 include 'functions.php';
@@ -45,3 +50,5 @@ $data = $result->fetch_assoc();
 </div>
 </body>
 </html>
+<? 
+?>

@@ -9,6 +9,13 @@ if (!isset($_SESSION['username'])) {
 if ($_SESSION['username'] === 'kz20112023') {
   // Hiển thị nội dung nếu tên người dùng là kz20112023
   echo "Bạn đã đăng nhập thành công!";
+}else
+if ($_SESSION['username'] === 'phap') {
+  // Hiển thị nội dung nếu tên người dùng là kz20112023
+  echo "Bạn đã đăng nhập thành công!";
+} else if ($_SESSION['username'] === 'dung') {
+  // Hiển thị nội dung nếu tên người dùng là kz20112023
+  echo "Bạn đã đăng nhập thành công!";
 } else {
   // Hiển thị thông báo không đủ quyền
   echo "Không đủ quyền";

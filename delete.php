@@ -1,4 +1,9 @@
 <?php
+if($_SESSION['username'] != 'kz20112023') {
+    echo ("<script>alert('Có lỗi xảy ra, không thể xóa!');</script>");
+    return;
+    }
+// Kết nối cơ sở dữ liệu
 require_once 'db.php';
 require_once 'functions.php';
 // Kết nối cơ sở dữ liệu
