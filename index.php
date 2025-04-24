@@ -1,30 +1,30 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['username'])) {
-  header("Location: login.php");
-  exit;
-}
+// if (!isset($_SESSION['username'])) {
+//   header("Location: login.php");
+//   exit;
+// }
 
-if ($_SESSION['username'] === 'kz20112023') {
-  // Hiển thị nội dung nếu tên người dùng là kz20112023
-  echo "Bạn đã đăng nhập thành công! " . $_SESSION['username'];
-} else if ($_SESSION['username'] === 'phap') {
+// if ($_SESSION['username'] === 'kz20112023') {
+//   // Hiển thị nội dung nếu tên người dùng là kz20112023
+//   echo "Bạn đã đăng nhập thành công! " . $_SESSION['username'];
+// } else if ($_SESSION['username'] === 'phap') {
 
-  // Hiển thị nội dung nếu tên người dùng là kz20112023
-  echo "Bạn đã đăng nhập thành công!" . $_SESSION['username'];
-} else if ($_SESSION['username'] === 'dung') {
+//   // Hiển thị nội dung nếu tên người dùng là kz20112023
+//   echo "Bạn đã đăng nhập thành công!" . $_SESSION['username'];
+// } else if ($_SESSION['username'] === 'dung') {
 
-  // Hiển thị nội dung nếu tên người dùng là kz20112023
-  echo "Bạn đã đăng nhập thành công! " . $_SESSION['username'];
-} else if ($_SESSION['username'] === 'TRANNGUYEN') {
-  // Hiển thị nội dung nếu tên người dùng là kz20112023
-  echo "Bạn đã đăng nhập thành công! " . $_SESSION['username'];
-} else {
-  // Hiển thị thông báo không đủ quyền
-  echo "Không đủ quyền";
-  exit;
-}
+//   // Hiển thị nội dung nếu tên người dùng là kz20112023
+//   echo "Bạn đã đăng nhập thành công! " . $_SESSION['username'];
+// } else if ($_SESSION['username'] === 'TRANNGUYEN') {
+//   // Hiển thị nội dung nếu tên người dùng là kz20112023
+//   echo "Bạn đã đăng nhập thành công! " . $_SESSION['username'];
+// } else {
+//   // Hiển thị thông báo không đủ quyền
+//   echo "Không đủ quyền";
+//   exit;
+// }
 // File: index.php
 require_once 'db.php'; // Kết nối đến cơ sở dữ liệu
 require_once 'functions.php'; // Các hàm hỗ trợ
@@ -76,8 +76,13 @@ $thongKeThuBunHenContent = ob_get_clean();
 
     <?php
     if (isset($_SESSION['username'])) {
-      echo '<div class="container mt-4 mb-4">';
+      echo '<div class="container mt-4 mb-4 d-flex justify-content-around">';
+      echo '<a href="#welcome" class="btn btn-outline-info">Chào '.$_SESSION['username'].'</a>';
       echo '<a href="/logout.php" class="btn btn-danger">Đăng xuất</a>';
+      echo '</div>';
+    }else{
+      echo '<div class="container mt-4 mb-4">';
+      echo '<a href="/login.php" class="btn btn-danger">Đăng nhập</a>';
       echo '</div>';
     }
     ?>
@@ -135,11 +140,12 @@ $thongKeThuBunHenContent = ob_get_clean();
           foreach ($tables as $i => $table) :
             if ($table === "ngansachcuatoi") {
 
-              if ($_SESSION['username'] === "kz20112023") {
+              if ($_SESSION['username'] != "kz20112023") {
 
-                $default = GetTableName($table);
-              } else {
                 continue;
+              } else {
+                $default = GetTableName($table);
+
               }
             } else {
 
@@ -200,12 +206,12 @@ $thongKeThuBunHenContent = ob_get_clean();
                 ?>
                   <div class="col-md-3">
                     <label for="<?= $column->name ?>" class="form-label"><?= htmlspecialchars($label) ?></label>
-                    <input type="<?= $type ?>" name="<?= $column->name ?>" id="<?= $column->name ?>" class="form-control" <?= $type != 'text' ? 'step="0.01"' : '' ?>>
+                    <input type="<?= $type ?>" name="<?= $column->name ?>" id="<?= $column->name ?>" class="form-control" <?= $type != 'text' ? 'step="1"' : '' ?>>
                   </div>
                 <?php endforeach; ?>
                 <div class="col-md-1">
                   <?php
-                  if ($_SESSION['username'] === 'kz20112023' || $_SESSION['username'] === 'TRANNGUYEN') {
+                  if ($_SESSION['username'] === 'kz20112023' || $_SESSION['username'] === 'TRANNGUYEN' || $_SESSION['username'] === 'dung') {
                     echo '<button type="submit" class="btn btn-primary">Thêm</button>';
                   }
 

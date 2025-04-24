@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if ($_SESSION['username'] != 'kz20112023') {
+if ($_SESSION['username'] != 'kz20112023' && $_SESSION['username'] != 'TRANNGUYEN' && $_SESSION['username'] != 'dung') {
   echo ("<script>alert('Có lỗi xảy ra, không thể sửa!'); window.location.href = 'index.php';</script>");
   return;
 }
@@ -11,7 +11,12 @@ include 'functions.php';
 // edit.php
 $table = $_GET['table'];
 $id = $_GET['id'];
-
+if($_SESSION['username'] == 'dung' ) {
+  if($table != 'bunhen'){
+    echo json_encode(['success' => false, 'message' => 'Có lỗi xảy ra khi sửa doanh thu']);
+    exit;
+  }
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $fields = array_keys($_POST);
   $values = array_map(fn ($v) => "'" . $conn->real_escape_string($v) . "'", array_values($_POST));

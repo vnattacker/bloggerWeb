@@ -3,7 +3,7 @@
 session_start();
 include 'db.php';
 $conn = db();
-if($_SESSION['username'] != 'kz20112023' && $_SESSION['username'] != 'TRANNGUYEN'){
+if($_SESSION['username'] != 'kz20112023' && $_SESSION['username'] != 'TRANNGUYEN' &&  $_SESSION['username'] != 'dung'){
   echo json_encode(['success' => false, 'message' => 'Có lỗi xảy ra khi thêm doanh thu']);
   exit;
 }
@@ -11,12 +11,22 @@ header('Content-Type: application/json');
 
 $table = $_GET['table'] ?? '';
 $allowed_tables = ['bannuocmia', 'bunhen', 'nhapmia', 'nhapda', 'nhapquat', 'chitieu', 'tiendiennuoc', 'ngansachcuatoi'];
+$allowedadung_tables = ['bunhen'];
 
+if( $_SESSION['username'] === 'dung'){
+  if (!in_array($table, $allowedadung_tables)) {
+    echo json_encode(['success' => false, 'message' => 'Có lỗi xảy ra khi thêm doanh thu']);
+    exit;
+  }
+}else  if($_SESSION['username'] === 'phap'){
+ 
+  echo json_encode(['success' => false, 'message' => 'Có lỗi xảy ra khi thêm doanh thu']);
+
+}
 if (!in_array($table, $allowed_tables)) {
   echo json_encode(['success' => false, 'message' => 'Bảng không hợp lệ']);
   exit;
 }
-
 $columns = [];
 $values = [];
 $types = '';
@@ -27,7 +37,11 @@ $columns[] = 'nguoighi';
 $values[] = '?';
 $types .= 's';
 $params[] = $_SESSION['username'];
-
+// Thêm cột nguoighi và giá trị session username vào mảng
+$columns[] = 'nguoisua';
+$values[] = '?';
+$types .= 's';
+$params[] = $_SESSION['username'];
 foreach ($_POST as $key => $value) {
   if ($key === 'action') continue;
   $columns[] = $key;

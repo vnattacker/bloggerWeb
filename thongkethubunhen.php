@@ -129,9 +129,9 @@ $tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bunhen W
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  const doanhThuChartCanvas = document.getElementById('doanhThuBunHenChart');
+  const doanhThuChartCanvas2 = document.getElementById('doanhThuBunHenChart');
 
-  new Chart(doanhThuChartCanvas, {
+  new Chart(doanhThuChartCanvas2, {
     type: 'line', // Chọn loại biểu đồ (line, bar, pie, ...)
     data: {
       labels: ['Hôm nay', 'Hôm qua', 'Tháng này', 'Tháng trước'],

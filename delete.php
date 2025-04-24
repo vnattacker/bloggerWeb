@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_SESSION['username'] != 'kz20112023') {
+if($_SESSION['username'] != 'kz20112023' && $_SESSION['username'] != 'TRANNGUYEN' &&  $_SESSION['username'] != 'dung'){ {
     echo ("<script>alert('Có lỗi xảy ra, không thể xóa!'); window.location.href = 'index.php';</script>");
     return;
     }
@@ -18,12 +18,25 @@ if (isset($_GET['table'], $_GET['id'])) {
 
     // Kiểm tra bảng hợp lệ
 
-    $valid_tables = ["bannuocmia", "bunhen","nhapmia", "nhapda", "nhapquat", "chitieu", "tiendiennuoc", "ngansachcuatoi"];
-    if (!in_array($table, $valid_tables)) {
-        die("Bảng không hợp lệ.");
+    $valid_tables = ["bannuocmia","nhapmia", "nhapda", "nhapquat", "chitieu", "tiendiennuoc", "ngansachcuatoi"];
+    $valid_tables_b = ["bunhen"];
+
+ 
+    if( $_SESSION['username'] === 'dung'){
+        if (!in_array($table, $valid_tables_b)) {
+          echo json_encode(['success' => false, 'message' => 'Có lỗi xảy ra khi thêm doanh thu']);
+          exit;
+        }
+      }else  if($_SESSION['username'] === 'phap'){
+       
+        echo json_encode(['success' => false, 'message' => 'Có lỗi xảy ra khi thêm doanh thu']);
+      
+      }
+      if (!in_array($table, $valid_tables)) {
+        die("Bảng không hợp lệ."); 
+      }
     }
 
-  
     // Xóa bản ghi
     $stmt = $conn->prepare("DELETE FROM $table WHERE id = ?");
     $stmt->bind_param("i", $id);

@@ -14,7 +14,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 
 // Thống kê hôm nay
-$homNay = date("Y-m-d H:i:s");
+$homNay = date("Y-m-d");
 $tongDoanhThuHomNay = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE(ngay_ban) = '$homNay'");
 $soLy5KBanHomNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE(ngay_ban) = '$homNay' AND don_gia = 5000");
 $soLy10KBanHomNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE(ngay_ban) = '$homNay' AND don_gia = 10000");
@@ -22,25 +22,25 @@ $tongSoLyBanHomNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia W
 
 
 // Thống kê hôm qua
-$homQua = date("Y-m-d H:i:s", strtotime("-1 day"));
+$homQua = date("Y-m-d", strtotime("-1 day"));
 $tongDoanhThuHomQua = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE(ngay_ban) = '$homQua'");
 $soLy5KBanHomQua = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE(ngay_ban) = '$homQua' AND don_gia = 5000");
 $soLy10KBanHomQua = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE(ngay_ban) = '$homQua' AND don_gia = 10000");
 $tongSoLyBanHomQua = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE(ngay_ban) = '$homQua'");
 
 // Thống kê tháng này
-$thangNay = date("Y-m H:i:s");
-$tongDoanhThuThangNay = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangNay'");
-$soLy5KBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangNay' AND don_gia = 5000");
-$soLy10KBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangNay' AND don_gia = 10000");
-$tongSoLyBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangNay'");
+$thangNay = date("Y-m");
+$tongDoanhThuThangNay = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangNay'");
+$soLy5KBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangNay' AND don_gia = 5000");
+$soLy10KBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangNay' AND don_gia = 10000");
+$tongSoLyBanThangNay = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangNay'");
 
 // Thống kê tháng trước
 $thangTruoc = date("Y-m", strtotime("-1 month"));
-$tongDoanhThuThangTruoc = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangTruoc'");
-$soLy5KBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangTruoc' AND don_gia = 5000");
-$soLy10KBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangTruoc' AND don_gia = 10000");
-$tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m %H:%i:%s') = '$thangTruoc'");
+$tongDoanhThuThangTruoc = executeQuery($conn, "SELECT SUM(thanh_tien) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangTruoc'");
+$soLy5KBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangTruoc' AND don_gia = 5000");
+$soLy10KBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangTruoc' AND don_gia = 10000");
+$tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocmia WHERE DATE_FORMAT(ngay_ban, '%Y-%m') = '$thangTruoc'");
 
 
 ?>
@@ -53,7 +53,7 @@ $tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocm
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Biểu đồ Doanh thu theo thời gian</h5>
-          <canvas id="doanhThuChart"></canvas>
+          <canvas id="doanhThuChart1"></canvas>
         </div>
       </div>
     </div>
@@ -118,9 +118,9 @@ $tongSoLyBanThangTruoc = executeQuery($conn, "SELECT SUM(so_luong) FROM bannuocm
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  const doanhThuChartCanvas = document.getElementById('doanhThuChart');
+  const doanhThuChartCanvas1 = document.getElementById('doanhThuChart1');
 
-  new Chart(doanhThuChartCanvas, {
+  new Chart(doanhThuChartCanvas1, {
     type: 'line', // Chọn loại biểu đồ (line, bar, pie, ...)
     data: {
       labels: ['Hôm nay', 'Hôm qua', 'Tháng này', 'Tháng trước'],
